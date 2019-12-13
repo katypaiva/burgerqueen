@@ -39,7 +39,7 @@ function Hall() {
                     {state.map((xis) => 
                         <div key={xis.id}>     
                             <div className='xis-entry'>    
-                                <button>{xis.name}</button> {xis.price} reais    
+                                <Button title={xis.name} /> {xis.price} reais    
                             </div>   
                         </div> )} 
                 </div> 
@@ -50,7 +50,7 @@ function Hall() {
                     {all.map((xis) => 
                         <div key={xis.id}>     
                             <div className='xis-entry'>    
-                                <button>{xis.name}</button> {xis.price} reais    
+                                <Button title={xis.name} /> {xis.price} reais    
                             </div>   
                         </div> )} 
                 </div>}

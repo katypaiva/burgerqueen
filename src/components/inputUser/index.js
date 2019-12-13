@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import firebase from '../../util/firebaseUtils'
+import Button from '../../components/Button/index'
 
 
 function Input() {
@@ -11,7 +12,6 @@ function Input() {
         e.preventDefault()        
        const client = nameInput.current.value;
        const table = tableInput.current.value;
-       console.log(table)
 
         firebase.firestore().collection('client').add({
             client,
@@ -30,7 +30,7 @@ function Input() {
                 <label>Table:</label>
                 <input type="number" ref={tableInput}/>
             </div>
-            <button onClick={submit}>Send</button>
+            <Button handleClick={submit} title={"Send"} />
         </form>
     )
 
