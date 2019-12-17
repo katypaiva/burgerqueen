@@ -1,0 +1,50 @@
+
+body{
+    background: #212121
+}
+
+.btn {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    margin-top: 16%
+}
+
+.restaurant-btn {
+    display: block;
+    width: 100%;
+    align-items: center;
+    border-right: 1px solid #444444;
+    height: 100%;
+    padding-top: 60%;
+}
+
+.kitchen-btn {
+    display: block;
+    align-items: center;
+    border-left: 1px solid #444444;
+    height: 100%;
+    padding-top: 60%;
+}
+
+.page {
+    margin-top: 8%;
+    font-family: Merriweather;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+    letter-spacing: 3px;
+    color: #FFFFFF;
+}
+
+.link {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    height: 600px;
+
+}
