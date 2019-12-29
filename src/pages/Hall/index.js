@@ -6,14 +6,11 @@ import H1 from '../../components/H1/index'
 import './index.css'
 
 
-
 function Hall() {
     const [state, setState] = useState([]);
     const [menu, setMenu] = useState(Boolean);
     const [all, setAll] = useState([]);
     const [request, setRequest] = useState([])
-    const [allrequest, setAllrequest] = useState([])
-
 
     useEffect(
         () => {
@@ -37,34 +34,31 @@ function Hall() {
         []
       );
 
-    const handleBreakfast = (item) => {
+    const handleRequest = (item) => {
         setRequest([...request, item])
     }
-    const handleAllDay = (item) => {
-        setAllrequest([...allrequest, item])
-    }
-    
-
+/*    const handleAllDay = (item) => {
+         setAllrequest([...allrequest, item])
+    } */
     
     const nameInput = useRef();
     const tableInput = useRef();
     const submit = () => {
-
        const client = nameInput.current.value;
        const table = tableInput.current.value;
-
         firebase.firestore().collection('request').add({
             client,
             table,
             request,
-            allrequest
+            time: new Date()
+            
         })
     } 
 
-    const delItem = (item, state, setstate) => {
-        const index = state.indexOf(item)
-          state.splice(index, 1)
-          setstate([...state])
+    const delItem = (item) => {
+        const index = request.indexOf(item)
+          request.splice(index, 1)
+          setRequest([...request])
         }
     
 
@@ -80,42 +74,42 @@ function Hall() {
             </div>
             {menu ? 
                 <div>
-                    {state.map((item) => 
-
-                        <div key={item.id}>     
-                            <div className='item-entry'>    
-                                <Button title={item.name} handleClick={() => handleBreakfast(item)} /> {item.price} reais 
- 
-                            </div>   
+                    {state.map((item, index) => 
+                        <div key={index}>        
+                                <Button title={item.name} handleClick={() => handleRequest(item)} /> {item.price} reais 
                         </div>
-
                         )} 
                 </div> 
-
             : 
             <div>
-            <div> 
-                    <H1 title={"Burgers"} />
-                    {all.map((item) => 
-                        item.type === "Burgers" ?
-                        <div key={item.id}>  
-                            <div className='item-entry'>    
-                                <Button title={item.name} handleClick={() => handleAllDay(item)} /> {item.price} reais 
-                            </div>   
+                <div> 
+                    <H1 title={"Simple Burgers"} />
+                    {all.map((item, index) => 
+                        item.type === "Simple Burgers" ?
+                        <div key={index}>     
+                                <Button title={item.name} handleClick={() => handleRequest(item)} /> {item.price} reais 
                         </div> :
                         false
                         )} 
                 </div>
             
+                <div> 
+                    <H1 title={"Double Burgers"} />
+                    {all.map((item, index) => 
+                        item.type === "Double Burgers" ?
+                        <div key={index}>     
+                                <Button title={item.name} handleClick={() => handleRequest(item)} /> {item.price} reais   
+                        </div> :
+                        false
+                        )} 
+                </div>
 
             <div> 
                 <H1 title={"Drinks"} />
-                {all.map((item) => 
+                {all.map((item, index) => 
                     item.type === "Drinks" ?
-                    <div key={item.id}>  
-                        <div className='item-entry'>    
-                             <Button title={item.name} handleClick={() => handleAllDay(item)} /> {item.price} reais 
-                         </div>   
+                    <div key={index}> 
+                             <Button title={item.name} handleClick={() => handleRequest(item)} /> {item.price} reais 
                     </div> 
                      :false
                      )} 
@@ -123,17 +117,24 @@ function Hall() {
 
             <div> 
                 <H1 title={"Cia"} />
-                {all.map((item) => 
+                {all.map((item, index) => 
                     item.type === "Cia" ?
-                    <div key={item.id}>  
-                        <div className='item-entry'>    
-                             <Button title={item.name} handleClick={() => handleAllDay(item)} /> {item.price} reais 
-                         </div>   
+                    <div key={index}>    
+                             <Button title={item.name} handleClick={() => handleRequest(item)} /> {item.price} reais  
                     </div> 
                      :false
                      )} 
             </div>
-
+            <div> 
+                    <H1 title={"Plus"} />
+                    {all.map((item, index) => 
+                        item.type === "plus" ?
+                        <div key={index}>  
+                                <Button title={item.name} handleClick={() => handleRequest(item)} /> {item.price} reais 
+                        </div> :
+                        false
+                        )} 
+                </div>
         </div>
             }
         
@@ -143,33 +144,26 @@ function Hall() {
                { menu?
                 request.map((item, index) => 
                     <div key={index}>
-                        <li>{item.name} = 
-                    {item.price} reais</li> 
-                    <Button handleClick={() => delItem(item, request, setRequest)} title={'-'}/>
+                        <li>{item.name} = {item.price} reais</li> 
+                    <Button handleClick={() => delItem(item)} title={'-'}/>
                     </div>
                 )
                 
             :
-                allrequest.map(item => 
+                request.map(item => 
                     <div>
                         <li>{item.name} = 
                     {item.price} reais</li> 
-                    <Button handleClick={() => delItem(item, allrequest, setAllrequest)} title={'-'}/>
+                    <Button handleClick={() => delItem(item)} title={'-'}/>
                     </div>
                 )
             } 
 
         </div>
-                {menu ?
                 <div className="total">
                     <p>Total value: <strong>{request.reduce((total, value) => total + value.price, 0)}</strong> reais</p>
                 </div>
-               :
-                 <div className="total">
-                    <p>Total value: <strong>{allrequest.reduce((total, value) => total + value.price, 0)}</strong> reais</p>
-                </div> 
-                }
-
+                
 
      </div>
     
