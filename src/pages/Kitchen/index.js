@@ -13,7 +13,8 @@ function Kitchen() {
             .get().then(querySnapshot => {
                 const request = [];
                 querySnapshot.forEach(doc => { 
-                    request.push(doc.data())
+                    request.push({id: doc.id,
+                        ...doc.data()})
                 })
                 setRequest(request)
             })
@@ -21,36 +22,38 @@ function Kitchen() {
         []
     )
 
-    const addSatus = () => {
-        firebase.firestore().collection('request').doc(id).update({
-            status: "Preparando"
-        })
+    const addSatus = (doc) => {
+      doc.status = "Pronto";
+        firebase.firestore().collection('request').doc(doc.id).update({
+            status: "Pronto",
+            time2: new Date()
+        }).then(
+            setRequest([...request])
+        )
             
     }
 
-    const updateSatus = () => {
-        firebase.firestore().collection('request').doc(id).update({
-            status: "Pronto"
-        })
-            
-    }
-
-        console.log(request)
+    
     return (
         <div>
-            {request.map((doc, index) => 
-                <div key={index}>
-                    <p>{doc.client}</p>
-                    <p>{doc.table}</p>
-                    {
-                        doc.request
-                        ? doc.request.map(item => <p>{item.name}</p>)
-                        : null
-                    }
-                    <Button handleClick={addSatus} title={'Preparando'} />
-                    <Button handleClick={updateSatus} title={'Pronto'} />
-                </div> 
-            
+            {request.map((doc, index) => {
+                if(doc.status === "Preparo"){
+                    
+                    return (<div key={index}>
+                        <p>{doc.client}</p>
+                        <p>{doc.table}</p>
+                        {
+                            doc.request
+                            ? doc.request.map(item => <p>{item.name}</p>)
+                            : null
+                        }
+                        <Button handleClick={()=> addSatus(doc)} title={'Pronto'} />
+                    </div> )
+                }
+
+            }
+
+               
             
             )}
         </div>

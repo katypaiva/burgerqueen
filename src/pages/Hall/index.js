@@ -50,9 +50,11 @@ function Hall() {
             client,
             table,
             request,
+            status: "Preparo",
             time: new Date()
             
         })
+        setRequest([])
     } 
 
     const delItem = (item) => {
