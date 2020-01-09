@@ -29,6 +29,15 @@ function Delivery () {
         )
     }    
 
+
+    const time = (item) => {
+        const timestamp = (item.timeK - item.timeH) / 1000;
+        const hours = Math.floor(timestamp / 60 / 60);
+        const minutes = Math.floor((timestamp - hours * 60 * 60) / 60);
+        const seconds = Math.floor(timestamp - hours * 60 * 60 - minutes * 60 );
+        return hours + ':' + minutes + ':' +  seconds
+    }
+
     return (
         <div>
             <div>
@@ -39,6 +48,7 @@ function Delivery () {
                             <p>Table: {doc.table}</p>
                             <p>Name: {doc.client}</p>
                             {doc.request.map(item => item.name)}
+                            <p>time: {time(doc)}</p>
                             <Button handleClick={() => updateSatus(doc)} title={'Entregue'}></Button>
                             
                         </>                
@@ -54,7 +64,7 @@ function Delivery () {
                         <>
                             <p>Table: {doc.table}</p>
                             <p>Name: {doc.client}</p>
-                            
+                            <p>time: {time(doc)}</p>
                             {doc.request.map(item => 
                                 <p>{item.name}</p>)}
                         </>                

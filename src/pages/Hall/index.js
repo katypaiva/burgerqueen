@@ -37,21 +37,20 @@ function Hall() {
     const handleRequest = (item) => {
         setRequest([...request, item])
     }
-/*    const handleAllDay = (item) => {
-         setAllrequest([...allrequest, item])
-    } */
+
     
     const nameInput = useRef();
     const tableInput = useRef();
     const submit = () => {
        const client = nameInput.current.value;
        const table = tableInput.current.value;
+
         firebase.firestore().collection('request').add({
             client,
             table,
             request,
             status: "Preparo",
-            time: new Date()
+            timeH: new Date().getTime(),
             
         })
         setRequest([])
@@ -70,9 +69,9 @@ function Hall() {
             <Button handleClick={() => setMenu(false)} title={"Lunch"}/>
             <div>
                 <label>Name:</label>
-                <Input value={nameInput} />
+                <Input value={nameInput} type={'text'} />
                 <label>Table:</label>
-                <Input value={tableInput} />
+                <Input value={tableInput} type={'number'} />
             </div>
             {menu ? 
                 <div>

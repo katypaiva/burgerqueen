@@ -26,7 +26,8 @@ function Kitchen() {
       doc.status = "Pronto";
         firebase.firestore().collection('request').doc(doc.id).update({
             status: "Pronto",
-            time2: new Date()
+            timeK: new Date().getTime(),
+
         }).then(
             setRequest([...request])
         )
