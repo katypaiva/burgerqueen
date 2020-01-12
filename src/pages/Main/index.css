@@ -1,48 +1,69 @@
-
-body{
-    background: #212121
+* {
+    margin: 0%;
+    padding: 0%;
 }
 
-.btn {
+body {
+    background: #FFFFFF;
+}
+
+.div-btn {
     display: flex;
     justify-content: space-around;
     align-content: center;
-    margin-top: 16%
+    margin-top: 6%;
+    padding: 0px;
 }
 
-.restaurant-btn {
+.departament-btn {
     display: block;
-    width: 100%;
-    align-items: center;
-    border-right: 1px solid #444444;
-    height: 100%;
-    padding-top: 60%;
+    height: 208px;
+    border: 1px solid #E7E7E7;
+    border-radius: 8px;
+    padding-top: 20%;
 }
 
-.kitchen-btn {
-    display: block;
-    align-items: center;
-    border-left: 1px solid #444444;
-    height: 100%;
-    padding-top: 60%;
+/* 
+.departament-btn:active {
+    background: #F7FAFF;
+    border: 1px solid #0066FF;
+  } */
+
+.restaurant-config {
+    margin-left: 8%;
+    margin-right: 4%;
 }
 
-.page {
+.kitchen-config {
+    margin-right: 8%;
+    margin-left: 4%
+}
+
+.page-link{
     margin-top: 8%;
-    font-family: Merriweather;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 25px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
     text-align: center;
-    letter-spacing: 3px;
-    color: #FFFFFF;
+}
+
+.font-config {
+    font-family: Raleway;   
+    font-style: normal;
+    color: #3A3B3D;
+}
+
+.title-main {
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 38px;
+    margin-top: 18%;
+    margin-left: 4%;
 }
 
 .link {
     display: block;
     width: 100%;
-    cursor: pointer;
     text-decoration: none;
     text-align: center;
     height: 550px;

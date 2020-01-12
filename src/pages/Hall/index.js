@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
-import firebase from '../../util/firebaseUtils'
-import Input from '../../components/inputUser/index'
-import Button from '../../components/Button/index'
-import H1 from '../../components/H1/index'
-import './index.css'
+import React, { useState, useEffect, useRef } from "react"
+import firebase from "../../util/firebaseUtils"
+import Input from "../../components/Input/index"
+import Button from "../../components/Button/index"
+import H1 from "../../components/H1/index"
+import "./index.css"
 
 
 function Hall() {
@@ -14,16 +14,14 @@ function Hall() {
 
     useEffect(
         () => {
-            firebase.firestore().collection('menu')
-            .get().then(querySnapshot => {
+            firebase.firestore().collection('menu').get().then(querySnapshot => {
                 const menu = [];
                 querySnapshot.forEach(doc => { 
                     menu.push(doc.data())
                 })
                 setState(menu)
             })
-            firebase.firestore().collection('all')
-            .get().then(querySnapshot => {
+            firebase.firestore().collection('all').get().then(querySnapshot => {
                 const menu = [];
                 querySnapshot.forEach(doc => { 
                     menu.push(doc.data())
@@ -64,112 +62,173 @@ function Hall() {
     
 
     return (
-        <div>
-            <Button handleClick={() => setMenu(true)} title={"Breakfast"}/>
-            <Button handleClick={() => setMenu(false)} title={"Lunch"}/>
-            <div>
-                <label>Name:</label>
-                <Input value={nameInput} type={'text'} />
-                <label>Table:</label>
-                <Input value={tableInput} type={'number'} />
+        <>
+            <>
+                <H1 class={"menu-legend font"} title={"Informações do pedido"}/>
+                <section>
+                    <div className="section-content">
+                        <label className="lable font">Nome do cliente</label>
+                        <Input value={nameInput} placeholder={"Ex: Fabio"} className={"input-name font input"} type={'text'} />
+                    </div>
+                    <div className="section-content">
+                        <label className="lable font">Número da mesa</label>
+                        <div className={"number-input"}>
+                            <div className="n font">Nº</div><Input value={tableInput} placeholder={"Ex: 02"}className={"input-table font input"} type={'number'} />
+                        </div>                       
+                    </div>
+                </section>
+            </>
+            <div className="menu-type">
+                <H1 class={"menu-legend space-above font"} title={"Escolha o cardápio"}/>
+                <Button className={"menu-type-btn"} handleClick={() => setMenu(true)} title={"Café da manhã"}/>
+                <Button className={"menu-type-btn"} handleClick={() => setMenu(false)} title={"Dia todo"}/>
             </div>
-            {menu ? 
-                <div>
-                    {state.map((item, index) => 
-                        <div key={index}>        
-                                <Button title={item.name} handleClick={() => handleRequest(item)} /> {item.price} reais 
+            <div className="request-section">
+                <div className="menu">
+                    <div className="section-legend font">Cardápio da realeza</div>
+                    {menu ? 
+                        <>
+                            <>
+                                <H1 class={"item-legend font"} title={"Cafés"} />
+                                {state.map((item, index) => 
+                                    item.type === "coffee" ?
+                                    <div className={"menu-item"} key={index}>       
+                                        <div>
+                                            <p className="p-name font">{item.name}</p>
+                                            <p className="p-price font">R${item.price},00</p>
+                                        </div> 
+                                        <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
+                                    </div>
+                                :false  )} 
+                            </> 
+                            <>
+                                <H1 class={"item-legend font"} title={"Outras Bebidas"} />
+                                {state.map((item, index) => 
+                                    item.type === "drink" ?
+                                    <div className={"menu-item"} key={index}>        
+                                        <div>
+                                            <p className="p-name font">{item.name}</p>
+                                            <p className="p-price font">R${item.price},00</p>
+                                        </div> 
+                                        <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
+                                    </div>
+                                :false  )} 
+                            </> 
+                            <>
+                                <H1 class={"item-legend font"} title={"Comida"} />
+                                {state.map((item, index) => 
+                                    item.type === "food" ?
+                                    <div className={"menu-item"} key={index}>        
+                                        <div>
+                                            <p className="p-name font">{item.name}</p>
+                                            <p className="p-price font">R${item.price},00</p>
+                                        </div> 
+                                        <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
+                                    </div>
+                                :false  )} 
+                            </> 
+                        </>
+                    : 
+                    <>
+                            <> 
+                                <H1 class={"item-legend font"} title={"Hamburguer Simples"} />
+                                {all.map((item, index) => 
+                                    item.type === "Simple Burgers" ?
+                                        <div className={"menu-item"} key={index}>     
+                                            <div>
+                                                <p className="p-name font">{item.name}</p>
+                                                <p className="p-price font">R${item.price},00</p>
+                                            </div> 
+                                                <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
+                                        </div> 
+                                :false )} 
+                            </>
+                            <> 
+                                <H1 class={"item-legend font"} title={"Hamburguer Duplo"} />
+                                {all.map((item, index) => 
+                                    item.type === "Double Burgers" ?
+                                        <div className={"menu-item"} key={index}>     
+                                            <div>
+                                                <p className="p-name font">{item.name}</p>
+                                                <p className="p-price font">R${item.price},00</p>
+                                            </div> 
+                                                <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
+                                        </div> 
+                                    :false )} 
+                            </>
+                            <> 
+                                <H1 class={"item-legend font"} title={"Bebidas"} />
+                                {all.map((item, index) => 
+                                    item.type === "Drinks" ?
+                                        <div className={"menu-item"} key={index}>     
+                                            <div>
+                                                <p className="p-name font">{item.name}</p>
+                                                <p className="p-price font">R${item.price},00</p>
+                                            </div> 
+                                            <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
+                                        </div> 
+                                    :false )} 
+                            </>
+                            <> 
+                                <H1 class={"item-legend font"} title={"Acompanhamentos"} />
+                                {all.map((item, index) => 
+                                    item.type === "Cia" ?
+                                        <div className={"menu-item"} key={index}>     
+                                            <div>
+                                                <p className="p-name font">{item.name}</p>
+                                                <p className="p-price font">R${item.price},00</p>
+                                            </div> 
+                                            <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
+                                        </div> 
+                                    :false )} 
+                            </>
+                            <> 
+                                <H1 class={"item-legend font"} title={"Extras"} />
+                                {all.map((item, index) => 
+                                    item.type === "plus" ?
+                                        <div className={"menu-item"} key={index}>     
+                                            <div>
+                                                <p className="p-name font">{item.name}</p>
+                                                <p className="p-price font">R${item.price},00</p>
+                                            </div> 
+                                            <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
+                                        </div> 
+                                    :false )} 
+                            </>
+                        </>}
+                </div>
+                <div className="resume">
+                    <>
+                        <H1 class={"resume-legend font"} title={"Resumo do pedido"} />               
+                    </>
+                    { menu?
+                        request.map((item, index) => 
+                        <div className="resume-itens" key={index}>
+                            <p className="li-item font">{item.name}</p>
+                            <div className="price-and-delbtn">
+                                <p className="li-price font">R${item.price},00</p> 
+                                <Button className={"delete-btn"} handleClick={() => delItem(item)} title={'+'} />
+                            </div>
                         </div>
+                        )                
+                    :
+                        request.map((item, index) => 
+                            <div className="resume-itens" key={index}>
+                                <p className="li-item font">{item.name}</p>
+                                <div className="price-and-delbtn">
+                                    <p className="li-price font">R${item.price},00</p> 
+                                    <Button className={"delete-btn"} handleClick={() => delItem(item)} title={'+'} />
+                                </div>
+                            </div>
                         )} 
-                </div> 
-            : 
-            <div>
-                <div> 
-                    <H1 title={"Simple Burgers"} />
-                    {all.map((item, index) => 
-                        item.type === "Simple Burgers" ?
-                        <div key={index}>     
-                                <Button title={item.name} handleClick={() => handleRequest(item)} /> {item.price} reais 
-                        </div> :
-                        false
-                        )} 
-                </div>
-            
-                <div> 
-                    <H1 title={"Double Burgers"} />
-                    {all.map((item, index) => 
-                        item.type === "Double Burgers" ?
-                        <div key={index}>     
-                                <Button title={item.name} handleClick={() => handleRequest(item)} /> {item.price} reais   
-                        </div> :
-                        false
-                        )} 
-                </div>
-
-            <div> 
-                <H1 title={"Drinks"} />
-                {all.map((item, index) => 
-                    item.type === "Drinks" ?
-                    <div key={index}> 
-                             <Button title={item.name} handleClick={() => handleRequest(item)} /> {item.price} reais 
-                    </div> 
-                     :false
-                     )} 
-            </div>
-
-            <div> 
-                <H1 title={"Cia"} />
-                {all.map((item, index) => 
-                    item.type === "Cia" ?
-                    <div key={index}>    
-                             <Button title={item.name} handleClick={() => handleRequest(item)} /> {item.price} reais  
-                    </div> 
-                     :false
-                     )} 
-            </div>
-            <div> 
-                    <H1 title={"Plus"} />
-                    {all.map((item, index) => 
-                        item.type === "plus" ?
-                        <div key={index}>  
-                                <Button title={item.name} handleClick={() => handleRequest(item)} /> {item.price} reais 
-                        </div> :
-                        false
-                        )} 
+                        <div className="total">
+                            <p className="p-total font">Total</p><p className="total-price font">R${request.reduce((total, value) => total + value.price, 0)},00</p>
+                        </div>
+                        <Button className={"submit-btn font"} title={"Enviar"} handleClick={submit} />
                 </div>
         </div>
-            }
-        
-        <Button handleClick={submit} title={"Send"} />
-
-        <div className="resume">
-               { menu?
-                request.map((item, index) => 
-                    <div key={index}>
-                        <li>{item.name} = {item.price} reais</li> 
-                    <Button handleClick={() => delItem(item)} title={'-'}/>
-                    </div>
-                )
-                
-            :
-                request.map(item => 
-                    <div>
-                        <li>{item.name} = 
-                    {item.price} reais</li> 
-                    <Button handleClick={() => delItem(item)} title={'-'}/>
-                    </div>
-                )
-            } 
-
-        </div>
-                <div className="total">
-                    <p>Total value: <strong>{request.reduce((total, value) => total + value.price, 0)}</strong> reais</p>
-                </div>
-                
-
-     </div>
-    
-    )
-        
+    </>
+    )      
 }
 
 export default  Hall

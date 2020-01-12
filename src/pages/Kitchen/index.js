@@ -9,7 +9,7 @@ function Kitchen() {
 
     useEffect(
         () => {
-            firebase.firestore().collection('request')
+            firebase.firestore().collection('request').orderBy('timeH', 'asc')
             .get().then(querySnapshot => {
                 const request = [];
                 querySnapshot.forEach(doc => { 

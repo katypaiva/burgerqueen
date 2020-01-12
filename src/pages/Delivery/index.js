@@ -4,11 +4,12 @@ import Button from '../../components/Button/index'
 
 
 function Delivery () {
-
+    const [status, setStatus] = useState(true)
     const [request, setRequest] = useState([])
     useEffect(
         () => {
-            firebase.firestore().collection('request').get().then(querySnapshot => {
+            firebase.firestore().collection('request').orderBy('timeK', 'asc')
+            .get().then(querySnapshot => {
                 const request = [];
                 querySnapshot.forEach(doc => { 
                     request.push({id: doc.id,
@@ -35,13 +36,18 @@ function Delivery () {
         const hours = Math.floor(timestamp / 60 / 60);
         const minutes = Math.floor((timestamp - hours * 60 * 60) / 60);
         const seconds = Math.floor(timestamp - hours * 60 * 60 - minutes * 60 );
-        return hours + ':' + minutes + ':' +  seconds
+        return  hours + ':' + minutes + ':' +  seconds
     }
-
+    
     return (
         <div>
+            
+            <Button handleClick={() => setStatus(true)} title={"To delivery"}></Button>
+            <Button handleClick={() => setStatus(false)} title={"Finish"}></Button>
             <div>
-                {request.map((doc, index) => 
+                
+                {status ?
+                request.map((doc, index) => 
                 <div key={index}>
                     {doc.status === 'Pronto' ?
                         <>
@@ -53,23 +59,23 @@ function Delivery () {
                             
                         </>                
                     : false}
-                </div>)}
+                </div>):false}
             </div>
             
             <div>
-                <h1>Finalizado</h1>
-                {request.map((doc, index) => 
+                { status === false ?
+                request.map((doc, index) => 
                 <div key={index}>
                     {doc.status === 'Entregue' ?
                         <>
                             <p>Table: {doc.table}</p>
                             <p>Name: {doc.client}</p>
-                            <p>time: {time(doc)}</p>
+                            <p>seu pedido demorou: {time(doc)}</p>
                             {doc.request.map(item => 
                                 <p>{item.name}</p>)}
                         </>                
                     : false}
-                </div> )}
+                </div> ):false}
             </div>
         </div>
     )
