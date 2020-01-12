@@ -3,6 +3,7 @@ import firebase from "../../util/firebaseUtils"
 import Input from "../../components/Input/index"
 import Button from "../../components/Button/index"
 import H1 from "../../components/H1/index"
+import { Link } from 'react-router-dom'
 import "./index.css"
 
 
@@ -39,12 +40,14 @@ function Hall() {
     
     const nameInput = useRef();
     const tableInput = useRef();
+    const obstext = useRef();
     const submit = () => {
        const client = nameInput.current.value;
        const table = tableInput.current.value;
-
+       const obs = obstext.current.value;
         firebase.firestore().collection('request').add({
             client,
+            obs,
             table,
             request,
             status: "Preparo",
@@ -52,6 +55,7 @@ function Hall() {
             
         })
         setRequest([])
+        obstext.current.value = "";
     } 
 
     const delItem = (item) => {
@@ -60,10 +64,10 @@ function Hall() {
           setRequest([...request])
         }
     
-
     return (
         <>
             <>
+            <Link to="/pages/Delivery/index"><Button className={"link-request"} title={"Acompanhe os pedidos"}/></Link>
                 <H1 class={"menu-legend font"} title={"Informações do pedido"}/>
                 <section>
                     <div className="section-content">
@@ -85,7 +89,7 @@ function Hall() {
             </div>
             <div className="request-section">
                 <div className="menu">
-                    <div className="section-legend font">Cardápio da realeza</div>
+                <div className="section-legend font">Cardápio da realeza</div>
                     {menu ? 
                         <>
                             <>
@@ -213,6 +217,7 @@ function Hall() {
                         )                
                     :
                         request.map((item, index) => 
+                        <>
                             <div className="resume-itens" key={index}>
                                 <p className="li-item font">{item.name}</p>
                                 <div className="price-and-delbtn">
@@ -220,11 +225,17 @@ function Hall() {
                                     <Button className={"delete-btn"} handleClick={() => delItem(item)} title={'+'} />
                                 </div>
                             </div>
-                        )} 
+                        </>    
+                        )}
+                        {request.length >= 1? 
+                            <>
+                                <textarea className="obs font" placeholder="Observações" ref={obstext}></textarea>
+                            </>
+                            :false}
                         <div className="total">
                             <p className="p-total font">Total</p><p className="total-price font">R${request.reduce((total, value) => total + value.price, 0)},00</p>
                         </div>
-                        <Button className={"submit-btn font"} title={"Enviar"} handleClick={submit} />
+                        <Button className={"submit-btn"} title={"Enviar"} handleClick={submit} />
                 </div>
         </div>
     </>

@@ -9,6 +9,30 @@
     color: #3A3B3D;
 }
 
+.link-request {
+    width: 217px;
+    height: 48px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: #FFFFFF;
+    text-decoration: none;
+    border: none;
+    background: #FF7070;
+    margin-left: 65%;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.link-request:focus {
+    outline: none;
+}
+
+.link-request:active {
+    background: #E25353;
+}
+
 .menu-legend {
     font-weight: 600;
     font-size: 18px;
@@ -90,15 +114,10 @@ section {
 
 .input-table:focus {
     outline: none;
-    border-left: none;
     border: 1px solid #0066FF;
+    border-left: none;
 }
 
-.n:focus {
-    outline: none;
-    border-right: none;
-    border: 1px solid #0066FF;
-}
 
 .menu-type-btn {
     width: 184px;
@@ -117,6 +136,7 @@ section {
 
 .menu-type-btn:focus {
     outline: none;
+    color: #3A3B3D;
     border: 1px solid #0066FF;
     background: #F7FAFF;
 }
@@ -250,6 +270,30 @@ section {
     margin-left: 8px;
 }
 
+.delete-btn:focus {
+    outline: none;
+}
+
+.obs {
+    padding: 12px;
+    border: 1px solid #BDBDBD;
+    box-sizing: border-box;
+    border-radius: 4px;width: 298px;
+    height: auto;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 16px;
+}
+
+.obs:focus {
+    outline: none;
+    border: 1px solid #0066FF;
+}
+
+.obs::placeholder {
+    color: #CCCCCC;
+}
+
 .total {
     display: flex;
     justify-content: space-between;
@@ -270,6 +314,8 @@ section {
 }
 
 .submit-btn {
+    font-family: Raleway;
+    font-style: normal;
     margin-top: 16px;
     margin-bottom: 16px;
     background: #0B6BEF;
@@ -284,4 +330,12 @@ section {
     text-align: center;
     letter-spacing: 0.03em;
     color: #FFFFFF;
+}
+
+.submit-btn:focus {
+    outline: none;
+}
+
+.submit-btn:active {
+    background: #0E55B7;
 }

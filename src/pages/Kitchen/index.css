@@ -1,0 +1,110 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.kitchen {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.font {
+    font-family: Raleway;
+    font-style: normal;
+    color: #3A3B3D;
+    line-height: 20px;
+}
+
+.kitchen-legend {
+    font-size: 24px;
+    line-height: 20px;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: #FFFFFF;
+    box-shadow: 0px 2px 6px rgba(88, 116, 159, 0.15);
+    border-radius: 4px;
+    width: 373px;
+    height: auto;
+    margin-top: 8px;
+    padding: 12px;
+}
+
+.name-and-table {
+    display: flex;
+    justify-content: space-between;
+}
+
+.p-client {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.p-table {
+    background: #F2F5FA;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.item-and-obs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.p-item {
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 16px;
+}
+
+.p-obs {
+    align-self: flex-start;
+    width: 143px;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 8px;
+    word-wrap: break-word;
+    height: auto;
+    border: 1px solid #F2F5FA;
+    box-sizing: border-box;
+    border-radius: 2px;
+    margin-top: 16px;
+}
+
+.time {
+    text-align: end;
+    padding: 8px;
+    margin-top: 12px;
+    border-top: 1px solid #CCCCCC;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: right;
+    letter-spacing: 0.03em;
+    color: #BDBDBD;
+}
+
+.done-btn {
+    background: #0B6BEF;
+    border-radius: 4px;
+    border: none;
+    margin-top: 10px;
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 16px;
+}

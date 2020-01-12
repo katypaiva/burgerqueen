@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import firebase from 'firebase'
 import Button from '../../components/Button/index'
-
-
+import H1 from "../../components/H1/index" 
+import "./index.css"
 
 function Kitchen() {
     const [request, setRequest] = useState([])
@@ -23,40 +23,54 @@ function Kitchen() {
     )
 
     const addSatus = (doc) => {
-      doc.status = "Pronto";
+      doc.status = "Ready";
         firebase.firestore().collection('request').doc(doc.id).update({
-            status: "Pronto",
+            status: "Ready",
             timeK: new Date().getTime(),
 
         }).then(
             setRequest([...request])
         )
-            
     }
+
+    const timeH = (item) => {
+        const timestamp = item.timeH / 1000;
+        const hours = Math.floor(timestamp / 60 / 60);
+        const minutes = Math.floor((timestamp - hours * 60 * 60) / 60);
+        const seconds = Math.floor(timestamp - hours * 60 * 60 - minutes * 60 );
+        return  hours + ':' + minutes + ':' +  seconds
+        }
 
     
     return (
-        <div>
-            {request.map((doc, index) => {
-                if(doc.status === "Preparo"){
-                    
-                    return (<div key={index}>
-                        <p>{doc.client}</p>
-                        <p>{doc.table}</p>
-                        {
-                            doc.request
-                            ? doc.request.map(item => <p>{item.name}</p>)
-                            : null
-                        }
-                        <Button handleClick={()=> addSatus(doc)} title={'Pronto'} />
-                    </div> )
-                }
-
-            }
-
-               
-            
-            )}
+        <div className="kitchen">
+            <div>
+                <H1 title={"Pedidos em andamento"} class={"kitchen-legend font"} />
+            </div>
+            <div>
+                {request.map((doc, index) => {
+                    if(doc.status === "Preparo"){
+                        return (
+                            <div className="card">                                
+                                <div className="name-and-table">
+                                    <p className="p-client font">{doc.client}</p>
+                                    <p className="p-table font">Mesa {doc.table}</p>
+                                </div>
+                                <div key={index} className="item-and-obs">
+                                    <div className="items">
+                                        { doc.request ? 
+                                        doc.request.map(item =>
+                                            <p className="p-item font">{item.name}</p>
+                                            ): null}
+                                    </div>
+                                    <p className="p-obs font"><strong>Observações:</strong><br/>{doc.obs}</p>
+                                </div> 
+                                <p className="time font">Pedido feito ás {timeH(doc)}</p>
+                                <Button handleClick={()=> addSatus(doc)} className={"done-btn"} title={'Pronto'} />
+                            </div>)
+                    }
+                })}
+            </div>
         </div>
     )
 }
