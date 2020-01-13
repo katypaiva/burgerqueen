@@ -52,10 +52,13 @@ function Hall() {
             request,
             status: "Preparo",
             timeH: new Date().getTime(),
+            time: new Date().getHours() + "h" + new Date().getMinutes() 
             
         })
         setRequest([])
         obstext.current.value = "";
+        tableInput.current.value = "";
+        nameInput.current.value = "";
     } 
 
     const delItem = (item) => {
@@ -77,7 +80,7 @@ function Hall() {
                     <div className="section-content">
                         <label className="lable font">Número da mesa</label>
                         <div className={"number-input"}>
-                            <div className="n font">Nº</div><Input value={tableInput} placeholder={"Ex: 02"}className={"input-table font input"} type={'number'} />
+                            <div className="n">Nº</div><Input value={tableInput} placeholder={"Ex: 02"}className={"input-table font input"} type={'number'} />
                         </div>                       
                     </div>
                 </section>
@@ -99,7 +102,7 @@ function Hall() {
                                     <div className={"menu-item"} key={index}>       
                                         <div>
                                             <p className="p-name font">{item.name}</p>
-                                            <p className="p-price font">R${item.price},00</p>
+                                            <p className="p-price">R${item.price},00</p>
                                         </div> 
                                         <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
                                     </div>
@@ -112,7 +115,7 @@ function Hall() {
                                     <div className={"menu-item"} key={index}>        
                                         <div>
                                             <p className="p-name font">{item.name}</p>
-                                            <p className="p-price font">R${item.price},00</p>
+                                            <p className="p-price">R${item.price},00</p>
                                         </div> 
                                         <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
                                     </div>
@@ -125,7 +128,7 @@ function Hall() {
                                     <div className={"menu-item"} key={index}>        
                                         <div>
                                             <p className="p-name font">{item.name}</p>
-                                            <p className="p-price font">R${item.price},00</p>
+                                            <p className="p-price">R${item.price},00</p>
                                         </div> 
                                         <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
                                     </div>
@@ -141,7 +144,7 @@ function Hall() {
                                         <div className={"menu-item"} key={index}>     
                                             <div>
                                                 <p className="p-name font">{item.name}</p>
-                                                <p className="p-price font">R${item.price},00</p>
+                                                <p className="p-price">R${item.price},00</p>
                                             </div> 
                                                 <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
                                         </div> 
@@ -154,7 +157,7 @@ function Hall() {
                                         <div className={"menu-item"} key={index}>     
                                             <div>
                                                 <p className="p-name font">{item.name}</p>
-                                                <p className="p-price font">R${item.price},00</p>
+                                                <p className="p-price">R${item.price},00</p>
                                             </div> 
                                                 <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
                                         </div> 
@@ -167,7 +170,7 @@ function Hall() {
                                         <div className={"menu-item"} key={index}>     
                                             <div>
                                                 <p className="p-name font">{item.name}</p>
-                                                <p className="p-price font">R${item.price},00</p>
+                                                <p className="p-price">R${item.price},00</p>
                                             </div> 
                                             <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
                                         </div> 
@@ -180,7 +183,7 @@ function Hall() {
                                         <div className={"menu-item"} key={index}>     
                                             <div>
                                                 <p className="p-name font">{item.name}</p>
-                                                <p className="p-price font">R${item.price},00</p>
+                                                <p className="p-price">R${item.price},00</p>
                                             </div> 
                                             <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
                                         </div> 
@@ -193,7 +196,7 @@ function Hall() {
                                         <div className={"menu-item"} key={index}>     
                                             <div>
                                                 <p className="p-name font">{item.name}</p>
-                                                <p className="p-price font">R${item.price},00</p>
+                                                <p className="p-price">R${item.price},00</p>
                                             </div> 
                                             <Button className={"adition-btn"} title={"+"} handleClick={() => handleRequest(item)} />
                                         </div> 
@@ -210,7 +213,7 @@ function Hall() {
                         <div className="resume-itens" key={index}>
                             <p className="li-item font">{item.name}</p>
                             <div className="price-and-delbtn">
-                                <p className="li-price font">R${item.price},00</p> 
+                                <p className="li-price">R${item.price},00</p> 
                                 <Button className={"delete-btn"} handleClick={() => delItem(item)} title={'+'} />
                             </div>
                         </div>
@@ -221,7 +224,7 @@ function Hall() {
                             <div className="resume-itens" key={index}>
                                 <p className="li-item font">{item.name}</p>
                                 <div className="price-and-delbtn">
-                                    <p className="li-price font">R${item.price},00</p> 
+                                    <p className="li-price">R${item.price},00</p> 
                                     <Button className={"delete-btn"} handleClick={() => delItem(item)} title={'+'} />
                                 </div>
                             </div>
@@ -235,7 +238,7 @@ function Hall() {
                         <div className="total">
                             <p className="p-total font">Total</p><p className="total-price font">R${request.reduce((total, value) => total + value.price, 0)},00</p>
                         </div>
-                        <Button className={"submit-btn"} title={"Enviar"} handleClick={submit} />
+                        <Button disabled={request.length === 0} className={"submit-btn"} title={"Enviar"} handleClick={submit} />
                 </div>
         </div>
     </>

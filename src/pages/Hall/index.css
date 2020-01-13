@@ -6,7 +6,6 @@
 .font {
     font-family: Raleway;
     font-style: normal;
-    color: #3A3B3D;
 }
 
 .link-request {
@@ -44,6 +43,7 @@
 .space-above {
     margin-top: 6%;
 }
+
 section {
     display: flex;
     justify-content: flex-start;
@@ -58,6 +58,7 @@ section {
 
 .lable {
     font-weight: 500;
+    color: #3A3B3D;
     font-size: 12px;
     line-height: 16px;
 }
@@ -67,6 +68,7 @@ section {
     box-sizing: border-box;
     border-radius: 4px;
     padding: 12px;
+    color: #3A3B3D;
 }
 .input-name {
     margin-top: 3%;
@@ -100,11 +102,14 @@ section {
     font-weight: bold;
     font-size: 14px;
     line-height: 16px;
-    color: #BDBDBD;
     text-align: center;
+    font-family: Raleway;
+    font-style: normal;
+    color: #BDBDBD;
 }
 
 .input-table {
+    color: #3A3B3D;
     height: 40px;
     width: 64px;
     border-left: none;
@@ -151,6 +156,7 @@ section {
 }
 
 .section-legend {
+    color: #3A3B3D;
     font-weight: bold;
     margin-left: 100%;
     font-size: 24px;
@@ -160,6 +166,7 @@ section {
 }
 
 .item-legend {
+    color: #3A3B3D;
     font-weight: 600;
     font-size: 18px;
     line-height: 20px;
@@ -181,12 +188,15 @@ section {
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
+    color: #3A3B3D;
     margin: 12px;
     margin-bottom: 0px;
 }
 
 .p-price {
     font-weight: bold;
+    font-family: Raleway;
+    font-style: normal; 
     font-size: 12px;
     line-height: 16px;
     color: #A2A8BE;
@@ -232,6 +242,7 @@ section {
     font-size: 18px;
     line-height: 20px;
     margin-bottom: 7px;
+    color: #3A3B3D;
 }
 
 .resume-itens {
@@ -247,6 +258,7 @@ section {
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
+    color: #3A3B3D;
     margin-top: 11px;
 }
 
@@ -256,6 +268,8 @@ section {
     line-height: 16px;
     text-align: right;
     color: #A2A8BE;
+    font-family: Raleway;
+    font-style: normal;
     margin-top: 11px;
 }
 
@@ -282,6 +296,7 @@ section {
     height: auto;
     width: 100%;
     font-size: 14px;
+    color: #3A3B3D;
     margin-top: 16px;
 }
 
@@ -300,6 +315,7 @@ section {
     margin-top: 12px;
     margin-bottom: 8px;
     padding-top: 12px;
+    color: #3A3B3D;
     border-top: 1px solid #CCCCCC;
     font-size: 16px;
     line-height: 20px;
@@ -307,10 +323,12 @@ section {
 
 .p-total {
     font-weight: bold;
+    color: #3A3B3D;
 }
 
 .total-price {
     font-weight: 500;
+    color: #3A3B3D;
 }
 
 .submit-btn {
@@ -338,4 +356,8 @@ section {
 
 .submit-btn:active {
     background: #0E55B7;
+}
+
+.submit-btn:disabled {
+    background: #A2C9FF;
 }

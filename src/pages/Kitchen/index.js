@@ -33,13 +33,7 @@ function Kitchen() {
         )
     }
 
-    const timeH = (item) => {
-        const timestamp = item.timeH / 1000;
-        const hours = Math.floor(timestamp / 60 / 60);
-        const minutes = Math.floor((timestamp - hours * 60 * 60) / 60);
-        const seconds = Math.floor(timestamp - hours * 60 * 60 - minutes * 60 );
-        return  hours + ':' + minutes + ':' +  seconds
-        }
+   
 
     
     return (
@@ -65,7 +59,7 @@ function Kitchen() {
                                     </div>
                                     <p className="p-obs font"><strong>Observações:</strong><br/>{doc.obs}</p>
                                 </div> 
-                                <p className="time font">Pedido feito ás {timeH(doc)}</p>
+                                <p className="time font">Pedido feito ás {doc.time}</p>
                                 <Button handleClick={()=> addSatus(doc)} className={"done-btn"} title={'Pronto'} />
                             </div>)
                     }

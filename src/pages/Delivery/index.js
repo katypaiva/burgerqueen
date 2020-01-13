@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import firebase from 'firebase'
 import Button from '../../components/Button/index'
-
+import "./index.css"
 
 function Delivery () {
     const [status, setStatus] = useState(true)
@@ -11,9 +11,7 @@ function Delivery () {
             firebase.firestore().collection('request').orderBy('timeK', 'asc')
             .get().then(querySnapshot => {
                 const request = [];
-                querySnapshot.forEach(doc => { 
-                    request.push({id: doc.id,
-                        ...doc.data()})
+                querySnapshot.forEach(doc => {request.push({id: doc.id, ...doc.data()})
                 })
                 setRequest(request)
             })
@@ -22,14 +20,11 @@ function Delivery () {
     )
 
     const updateSatus = (doc) => {
-        doc.status = "Entregue";
-        firebase.firestore().collection('request').doc(doc.id).update({
-            status: "Entregue"
-        }).then(
+        doc.status = "Arrived";
+        firebase.firestore().collection('request').doc(doc.id).update({status: "Arrived"}).then(
             setRequest([...request])
         )
     }    
-
 
     const time = (item) => {
         const timestamp = (item.timeK - item.timeH) / 1000;
@@ -40,46 +35,49 @@ function Delivery () {
     }
     
     return (
-        <div>
-            
-            <Button handleClick={() => setStatus(true)} title={"To delivery"}></Button>
-            <Button handleClick={() => setStatus(false)} title={"Finish"}></Button>
-            <div>
+    <>
+        <>
+            <div className="buttons">
+                <Button className={"status-btn"} handleClick={() => setStatus(true)} title={"Pedidos prontos"}></Button>
+                <Button className={"status-btn"} handleClick={() => setStatus(false)} title={"Pedidos finalizados"}></Button>
+            </div>
+                {status ? 
+                request.map((doc, index) => 
+                        <div className="section-cards" key={index}>
+                            {doc.status === 'Ready' ?
+                            <div className="card">
+                                <div className="name-and-table">
+                                    <p className="p-client font">{doc.client}</p>
+                                    <p className="p-table font">Mesa {doc.table}</p>
+                                </div>
+                                {doc.request.map(item => <p className="p-item font">{item.name}</p>)}
+                                <p className="time font">Esse pedi ficou pronto em: {time(doc)}</p>
+                                <Button handleClick={() => updateSatus(doc)} className={"done-btn"} title={'Entregue'}></Button>
+                            </div>      
+                            : false}
+                        </div>
+                    
+                ):false}
+        </>
+        <>
+            { status === false ?
+                request.map((doc, index) => 
                 
-                {status ?
-                request.map((doc, index) => 
-                <div key={index}>
-                    {doc.status === 'Pronto' ?
-                        <>
-                            <p>Table: {doc.table}</p>
-                            <p>Name: {doc.client}</p>
-                            {doc.request.map(item => item.name)}
-                            <p>time: {time(doc)}</p>
-                            <Button handleClick={() => updateSatus(doc)} title={'Entregue'}></Button>
-                            
-                        </>                
-                    : false}
-                </div>):false}
-            </div>
-            
-            <div>
-                { status === false ?
-                request.map((doc, index) => 
-                <div key={index}>
-                    {doc.status === 'Entregue' ?
-                        <>
-                            <p>Table: {doc.table}</p>
-                            <p>Name: {doc.client}</p>
-                            <p>seu pedido demorou: {time(doc)}</p>
-                            {doc.request.map(item => 
-                                <p>{item.name}</p>)}
-                        </>                
-                    : false}
-                </div> ):false}
-            </div>
-        </div>
+                    <div className="section-cards" key={index}>
+                        {doc.status === 'Arrived' ?
+                            <div className="card">
+                                <div className="name-and-table">
+                                    <p className="p-client font">{doc.client}</p>
+                                    <p className="p-table font">Mesa {doc.table}</p>
+                                </div>
+                                {doc.request.map(item => <p className="p-item font">{item.name}</p>)}
+                                <p className="time font">Esse pedi ficou pronto em: {time(doc)}</p>
+                            </div>                 
+                        : false}
+                    </div>):false}
+        </>
+    </>
     )
-
 }
 
 export default Delivery
