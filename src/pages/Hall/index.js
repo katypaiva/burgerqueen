@@ -36,8 +36,7 @@ function Hall() {
     const handleRequest = (item) => {
         setRequest([...request, item])
     }
-
-    
+  
     const nameInput = useRef();
     const tableInput = useRef();
     const obstext = useRef();
@@ -53,7 +52,6 @@ function Hall() {
             status: "Preparo",
             timeH: new Date().getTime(),
             time: new Date().getHours() + "h" + new Date().getMinutes() 
-            
         })
         setRequest([])
         obstext.current.value = "";

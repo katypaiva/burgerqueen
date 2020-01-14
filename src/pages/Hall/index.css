@@ -223,9 +223,6 @@ section {
 }
 
 .resume {
-/*     position: fixed;
-    left: 355px;
-    top: 445px; */
     margin-top: 80px;
     background: #FFFFFF;
     box-shadow: 0px 2px 6px rgba(88, 116, 159, 0.15);
