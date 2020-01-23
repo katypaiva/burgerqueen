@@ -17,16 +17,12 @@ function Hall() {
         () => {
             firebase.firestore().collection('menu').get().then(querySnapshot => {
                 const menu = [];
-                querySnapshot.forEach(doc => { 
-                    menu.push(doc.data())
-                })
+                querySnapshot.forEach(doc => menu.push(doc.data()))
                 setState(menu)
             })
             firebase.firestore().collection('all').get().then(querySnapshot => {
                 const menu = [];
-                querySnapshot.forEach(doc => { 
-                    menu.push(doc.data())
-                })
+                querySnapshot.forEach(doc => menu.push(doc.data()))
                 setAll(menu)
             })
         },
@@ -64,7 +60,7 @@ function Hall() {
           request.splice(index, 1)
           setRequest([...request])
         }
-    
+
     return (
         <>
             <>
